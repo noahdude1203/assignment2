@@ -1,0 +1,29 @@
+
+== Here are the results of create_product():
+  - name: apples	id: 7	price: 3.990000
+
+== Here are the results of create_product_array():
+	• Name: apples	 inventory: 7	 price: 3.99
+	• Name: soup	 inventory: 6	 price: 1.99
+	• Name: milk	 inventory: 3	 price: 2.50
+	• Name: tofu	 inventory: 1	 price: 4.50
+	• Name: poptarts	 inventory: 2	 price: 5.99
+	• Name: lightbulbs	 inventory: 0	 price: 8.05
+	• Name: soda	 inventory: 5	 price: 2.99
+	• Name: chips	 inventory: 24	 price: 1.99
+
+== Here's the product with the highest price:
+  - name: lightbulbs	id: 0	price: 8.050000
+
+== Here's the product with the maximum investment:
+  - name: chips	id: 24	price: 1.990000
+
+== Here are the products ordered by increasing inventory:
+	• Name: lightbulbs	 inventory: 0	 price: 8.05
+	• Name: tofu	 inventory: 1	 price: 4.50
+	• Name: poptarts	 inventory: 2	 price: 5.99
+	• Name: milk	 inventory: 3	 price: 2.50
+	• Name: soda	 inventory: 5	 price: 2.99
+	• Name: soup	 inventory: 6	 price: 1.99
+	• Name: apples	 inventory: 7	 price: 3.99
+	• Name: chips	 inventory: 24	 price: 1.99
