@@ -3,8 +3,8 @@
  * the assignment.  Make sure to add your name and @oregonstate.edu email
  * address below:
  *
- * Name:
- * Email:
+ * Name: Noah Giss
+ * Email: gissn@oregonstate.edu
  */
 
 #include <stdio.h>
