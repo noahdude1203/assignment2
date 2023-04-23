@@ -8,6 +8,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "products.h"
 #include "dynarray.h"
@@ -27,8 +28,18 @@
  *   Should return a newly-allocated product structure whose fields are
  *   initialized with the values provided.
  */
+
 struct product* create_product(char* name, int inventory, float price) {
-  return NULL;
+  struct product* newProduct = malloc(sizeof(struct product));
+    
+  newProduct->name = (char*) malloc(strlen(name) * sizeof(char*));
+  strcpy(newProduct->name, name);
+  
+  // Assign the id and price values to the corresponding fields in the product struct
+  newProduct->inventory = inventory;
+  newProduct->price = price;
+
+  return newProduct;
 }
 
 
@@ -43,7 +54,7 @@ struct product* create_product(char* name, int inventory, float price) {
  *     as well as memory allocated for the struct itself.
  */
 void free_product(struct product* product) {
-
+    free(product);
 }
 
 
@@ -78,7 +89,13 @@ void free_product(struct product* product) {
  *   arguments.
  */
 struct dynarray* create_product_array(int num_products, char** names, int* inventory, float* prices) {
-  return NULL;
+  struct dynarray* new = dynarray_create();
+  for (int i = 0; i < num_products; i++){
+    char* name = names[i];
+    struct product* value = create_product(name,inventory[i], prices[i]);
+    dynarray_insert(new, i, value);
+  }
+  return new;
 }
 
 
@@ -97,7 +114,11 @@ struct dynarray* create_product_array(int num_products, char** names, int* inven
  *     is to be freed
  */
 void free_product_array(struct dynarray* products) {
-
+  int length = dynarray_length(products);
+  for (int i = 0; i < length; i++){
+    free_product(dynarray_get(products, 0));
+    dynarray_remove(products, 0);
+  }
 }
 
 
@@ -110,7 +131,11 @@ void free_product_array(struct dynarray* products) {
  *   products - the dynamic array of products to be printed
  */
 void print_products(struct dynarray* products) {
-
+  printf("== Here are the results of create_product_array():\n");
+    for (int i = 0; i < dynarray_length(products); i++){
+      struct product* temp = dynarray_get(products, i);
+      printf("	• Name: %s	 inventory: %u	 price: %f\n", temp->name, temp->inventory, temp->price);
+    }
 }
 
 
@@ -132,7 +157,16 @@ void print_products(struct dynarray* products) {
  *   the array.
  */
 struct product* find_max_price(struct dynarray* products) {
-  return NULL;
+  int max = 0;
+  struct product* maxtemp = dynarray_get(products, max);
+  for (int i = 1; i < dynarray_length(products); i++){
+      struct product* temp = dynarray_get(products, i);
+      if ((maxtemp->price) < (temp->price)){
+        max = i;
+        maxtemp = temp;
+      }
+  }
+  return maxtemp;
 }
 
 
@@ -158,7 +192,22 @@ struct product* find_max_price(struct dynarray* products) {
  *   the array.
  */
 struct product* find_max_investment(struct dynarray* products) {
-  return NULL;
+  int max = 0;
+  struct product* maxtemp = dynarray_get(products, max);
+  float max_investment = maxtemp->price * maxtemp->inventory;
+    
+    for (int i = 1; i < dynarray_length(products); i++) {
+        struct product* temp = dynarray_get(products, i);
+        float investment = temp->price * temp->inventory;
+        
+        if (investment > max_investment) {
+            maxtemp = temp;
+            max_investment = investment;
+        }
+    }
+    
+    // Return a pointer to the product with the largest investment
+    return maxtemp;
 }
 
 
@@ -181,6 +230,8 @@ struct product* find_max_investment(struct dynarray* products) {
  *   returns, this array should be sorted by ascending inventory (lowest to
  *   highest).
  */
-void sort_by_inventory(struct dynarray* products) {
 
+//sort a-z
+void sort_by_inventory(struct dynarray* products) {
+  
 }
